@@ -1,27 +1,24 @@
-cmake_minimum_required(VERSION 3.10)
-project(SFMLtriangles)
+cmake_minimum_required(VERSION 3.16)
+project(SFMLtriangles LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+# Output compiled binary to build/bin
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# List all source files
-set(SOURCES
-    main.cpp
-    Game.cpp  # Add your new source file here
-    Triangle.cpp
-    Figure.cpp
-    Grid.cpp
-)
+# Find SFML 3
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
 
-# List all header files (optional, for clarity)
-set(HEADERS
-    Game.h    # Add your new header file here
-    Triangle.h
-    Figure.h
-    Grid.h
-)
+# Gather source and header files
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
+file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS include/*.h)
 
-add_executable(SFMLtriangles ${SOURCES})
-target_link_libraries(SFMLtriangles sfml-graphics sfml-window sfml-system)
+# Create the executable
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
+# Include header directory
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+
+# Link SFML 3 libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system)

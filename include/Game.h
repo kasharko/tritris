@@ -17,7 +17,6 @@
 
 inline sf::RectangleShape makeLineFromVector3i(sf::Vector3i vertex1, sf::Vector3i vertex2, int scale)
 {   
-
     float vertex1x = toCartesian(vertex1).x * scale;
     float vertex1y = toCartesian(vertex1).y * scale;
     float vertex2x = toCartesian(vertex2).x * scale;
@@ -26,10 +25,10 @@ inline sf::RectangleShape makeLineFromVector3i(sf::Vector3i vertex1, sf::Vector3
     sf::Vector2f endPoint(vertex2x, vertex2y);
     float lineLength = std::sqrt(std::pow(endPoint.x - startPoint.x, 2) + 
                                  std::pow(endPoint.y - startPoint.y, 2));
-    float angle = std::atan2(endPoint.y - startPoint.y, endPoint.x - startPoint.x) * 180 / 3.14159;
+    float angle = std::atan2(endPoint.y - startPoint.y, endPoint.x - startPoint.x);
     sf::RectangleShape line = sf::RectangleShape(sf::Vector2f(lineLength, 3)); 
     line.setPosition(startPoint);                              
-    line.setRotation(angle); 
+    line.setRotation(sf::radians(angle));
     line.setFillColor(sf::Color::White);
     return line;
 }
@@ -54,7 +53,6 @@ private:
 	//Window
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
-	sf::Event ev;
 
 	//Mouse positions
 

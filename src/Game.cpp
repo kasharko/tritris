@@ -11,8 +11,8 @@ void Game::initVariables()
 
 void Game::initWindow()
 {
-	this->videoMode.height = 600;
-	this->videoMode.width = 800;
+    this->videoMode = sf::VideoMode({800u, 600u});
+
 	
 	this->window = new sf::RenderWindow(this->videoMode, "Game 1", sf::Style::Titlebar | sf::Style::Close);
 
@@ -29,7 +29,7 @@ Game::Game()
 
     Figure fig = Figure1(3, 6, -9);
     for (Triangle& triangle : fig.getTriangles()) {
-        sf::VertexArray triVertex(sf::Triangles, 3); // TODO: to make a separate class for TriangleVertexArray?
+        sf::VertexArray triVertex(sf::PrimitiveType::Triangles, 3); // TODO: to make a separate class for TriangleVertexArray?
         //sf::VertexArray triVertex;
         //triVertex.setPrimitiveType(sf::Triangles);
         //triVertex.resize(3);
@@ -70,17 +70,17 @@ const bool Game::getEndGame() const
 //Functions
 void Game::pollEvents()
 {
-	//Event polling
-	while (this->window->pollEvent(this->ev))
-	{
-		switch (this->ev.type)
-		{
-		case sf::Event::Closed:
-			this->window->close();
-			break;
-		}
-	}
+    // Event polling
+    while (auto event = this->window->pollEvent())
+    {
+        // Window closed
+        if (event->is<sf::Event::Closed>())
+        {
+            this->window->close();
+        }
+    }
 }
+
 
 void Game::update()
 {
