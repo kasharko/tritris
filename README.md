@@ -4,7 +4,7 @@ A Tetris-like falling-piece game played on a triangular grid grid. Written in C+
 
 ## Concept
 
-Standard Tetris uses square tiles on a rectangular grid. This project explores the same falling-piece mechanic on a grid of triangles, where pieces are composed of triangular cells arranged in triangular coordinate space. The coordinate transformation from triangular to Cartesian space is handled internally.
+Standard Tetris uses square tiles on a rectangular grid. This project explores the same falling-piece mechanic on a grid of triangles, where pieces are composed of triangular cells arranged in triangular coordinate space.
 
 ## Current State
 
@@ -16,11 +16,10 @@ Standard Tetris uses square tiles on a rectangular grid. This project explores t
 - SFML window initialisation and render loop
 - Rendering of triangular pieces on screen
 
-
 ## Dependencies
 
 - [SFML](https://www.sfml-dev.org/) ≥ 3.0
-- CMake ≥ 3.x
+- CMake ≥ 3.21
 - g++ with C++17 support
 
 ## Build
